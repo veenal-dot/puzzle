@@ -6,260 +6,334 @@
   <title>Samta's Baby Shower — Gender Reveal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --pink: #D4537E;
-      --pink-light: #FBEAF0;
-      --pink-mid: #F4C0D1;
-      --text-primary: #1a1a1a;
-      --text-secondary: #6b6b6b;
-      --text-muted: #aaaaaa;
-      --border: rgba(0,0,0,0.08);
-      --border-hover: rgba(0,0,0,0.18);
-      --bg: #fefefe;
-      --bg-secondary: #f9f8f7;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'DM Sans', system-ui, sans-serif;
+      --sun:         #f7d97a;
+      --sun-light:   #fdf8e7;
+      --sun-pale:    #fef9ed;
+      --sun-deep:    #c8a030;
+      --sage:        #a8c8a0;
+      --sage-light:  #eef5ec;
+      --sage-deep:   #5a8a52;
+      --lilac:       #c0b0d8;
+      --lilac-light: #f2eef8;
+      --cloud:       #b8d8e8;
+      --cloud-light: #edf5fa;
+      --peach:       #f0c898;
+      --peach-light: #fef4e8;
+      --text:        #4a4440;
+      --text-soft:   #7a7068;
+      --text-muted:  #b0a898;
+      --border:      rgba(160,140,100,0.18);
+      --border-hover:rgba(160,140,100,0.35);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Nunito', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text-primary);
+      background: #fdfbf7;
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* ── top bar ── */
-    .top-bar {
-      width: 100%;
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(192,176,216,0.15) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(168,200,160,0.15) 0%, transparent 45%),
+        radial-gradient(circle at 55% 45%, rgba(247,217,122,0.10) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
     }
-    .top-bar-text {
-      font-family: var(--serif);
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
+
+    /* ── banner ── */
+    .banner {
+      width: 100%;
+      background: linear-gradient(90deg, var(--lilac-light), var(--sun-light), var(--sage-light), var(--sun-light), var(--lilac-light));
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .banner-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--sun-deep);
       text-transform: uppercase;
     }
 
     /* ── main ── */
     main {
       width: 100%;
-      max-width: 620px;
-      padding: 4rem 2rem 6rem;
+      max-width: 640px;
+      padding: 3.5rem 1.75rem 6rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
-    /* ── hero header ── */
+    /* ── bubbles ── */
+    .bubbles {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+      animation: floatIn 0.8s ease both;
+    }
+    .bubble { border-radius: 50%; }
+    .bubble:nth-child(1) { background: var(--sun);   width: 12px; height: 12px; }
+    .bubble:nth-child(2) { background: var(--sage);  width: 10px; height: 10px; }
+    .bubble:nth-child(3) { background: var(--lilac); width: 14px; height: 14px; }
+    .bubble:nth-child(4) { background: var(--cloud); width: 10px; height: 10px; }
+    .bubble:nth-child(5) { background: var(--peach); width: 12px; height: 12px; }
+
+    /* ── hero ── */
     .hero {
       text-align: center;
-      margin-bottom: 3.5rem;
-      animation: fadeUp 0.8s ease both;
+      margin-bottom: 2.75rem;
+      animation: fadeUp 0.8s 0.1s ease both;
     }
     .hero-eyebrow {
-      font-family: var(--sans);
+      display: inline-block;
+      background: var(--sun-pale);
+      border: 1px solid var(--sun);
+      border-radius: 50px;
+      padding: 0.3rem 1.1rem;
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--pink);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: var(--sun-deep);
       text-transform: uppercase;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(38px, 8vw, 56px);
-      font-weight: 300;
-      line-height: 1.15;
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 em {
-      font-style: italic;
+      font-size: clamp(34px, 7vw, 52px);
       font-weight: 400;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1.25rem;
     }
+    .hero h1 em { font-style: italic; color: var(--sage-deep); }
     .hero p {
       font-size: 15px;
       font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      max-width: 400px;
+      color: var(--text-soft);
+      line-height: 1.85;
+      max-width: 420px;
       margin: 0 auto;
     }
 
-    /* ── divider ── */
-    .divider {
-      width: 100%;
+    /* ── rainbow bar ── */
+    .color-blocks {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 2rem 0;
+      width: 100%;
+      height: 5px;
+      border-radius: 50px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
     }
-    .divider-line { flex: 1; height: 1px; background: var(--border); }
-    .divider-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--pink-mid);
-    }
+    .color-blocks span { flex: 1; }
+    .color-blocks span:nth-child(1) { background: var(--sun); }
+    .color-blocks span:nth-child(2) { background: var(--sage); }
+    .color-blocks span:nth-child(3) { background: var(--lilac); }
+    .color-blocks span:nth-child(4) { background: var(--cloud); }
+    .color-blocks span:nth-child(5) { background: var(--peach); }
 
     /* ── challenge card ── */
     .challenge-card {
       width: 100%;
+      background: #fff;
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 24px;
       padding: 2.25rem 2rem;
-      background: var(--bg);
-      animation: fadeUp 0.9s 0.15s ease both;
+      box-shadow: 0 4px 32px rgba(160,140,100,0.08);
+      animation: fadeUp 0.85s 0.25s ease both;
     }
     .card-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
+    }
+    .card-label::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--sun);
+      border-radius: 2px;
+    }
+
+    .riddle-box {
+      background: var(--sun-pale);
+      border: 1px solid var(--sun);
+      border-radius: 16px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.75rem;
     }
     .riddle {
       font-family: var(--serif);
-      font-size: 19px;
-      font-weight: 300;
+      font-size: 18px;
+      font-weight: 400;
       font-style: italic;
-      line-height: 2;
-      color: var(--text-primary);
-      border-left: 2px solid var(--pink-mid);
-      padding-left: 1.25rem;
-      margin-bottom: 2rem;
+      line-height: 2.1;
+      color: var(--text);
     }
 
-    /* ── input area ── */
-    .input-group {
-      display: flex;
-      gap: 10px;
-    }
-    .input-group input {
+    /* ── input ── */
+    .input-row { display: flex; gap: 10px; }
+    .input-row input {
       flex: 1;
-      height: 44px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      height: 46px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
       padding: 0 16px;
       font-family: var(--sans);
       font-size: 14px;
-      font-weight: 300;
-      color: var(--text-primary);
-      background: var(--bg-secondary);
+      font-weight: 400;
+      color: var(--text);
+      background: var(--sun-pale);
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .input-group input::placeholder { color: var(--text-muted); }
-    .input-group input:focus { border-color: var(--pink); background: #fff; }
-    .input-group button {
-      height: 44px;
-      padding: 0 22px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--text-primary);
+    .input-row input::placeholder { color: var(--text-muted); }
+    .input-row input:focus { border-color: var(--sage); background: #fff; }
+    .input-row button {
+      height: 46px;
+      padding: 0 24px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--sage) 0%, var(--lilac) 100%);
       color: #fff;
       font-family: var(--sans);
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 600;
       letter-spacing: 0.04em;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: opacity 0.2s, transform 0.1s;
       white-space: nowrap;
     }
-    .input-group button:hover { background: #2d2d2d; }
-    .input-group button:active { transform: scale(0.97); }
+    .input-row button:hover { opacity: 0.88; }
+    .input-row button:active { transform: scale(0.97); }
 
     .feedback {
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       font-size: 13px;
+      font-weight: 400;
       min-height: 20px;
+    }
+    .feedback.wrong { color: #b06040; }
+    .feedback.hint  { color: var(--text-muted); }
+    .tries { font-size: 11px; color: var(--text-muted); text-align: right; margin-top: 0.5rem; }
+
+    /* ── divider ── */
+    .flower-divider {
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-    .feedback.wrong { color: #c0392b; }
-    .feedback.hint { color: var(--text-muted); }
-    .tries {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: right;
-      margin-top: 0.5rem;
-    }
-
-    /* ── reveal section ── */
-    #reveal-section {
-      display: none;
+      gap: 0.75rem;
       width: 100%;
-      text-align: center;
-      animation: fadeUp 0.7s ease both;
+      margin: 2rem 0;
     }
-    .reveal-top {
-      border: 1px solid var(--pink-mid);
-      border-radius: 16px;
-      background: var(--pink-light);
-      padding: 3rem 2rem;
-      margin-bottom: 1.5rem;
+    .flower-line { flex: 1; height: 1px; background: var(--border); }
+    .flower-icon { color: var(--sun); font-size: 18px; }
+
+    /* ── reveal ── */
+    #reveal-section { display: none; width: 100%; text-align: center; }
+
+    .reveal-card {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(160,140,100,0.12);
+      animation: revealPop 0.7s cubic-bezier(0.22,1,0.36,1) both;
     }
-    .reveal-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
+    .reveal-top-strip {
+      height: 8px;
+      background: linear-gradient(90deg, var(--sun), var(--sage), var(--lilac), var(--cloud), var(--peach));
+    }
+    .reveal-body {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      padding: 3rem 2rem 2.75rem;
+    }
+    .reveal-badge {
+      display: inline-block;
+      background: var(--sage-light);
+      border: 1px solid var(--sage);
+      border-radius: 50px;
+      padding: 0.3rem 1.1rem;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.2em;
+      color: var(--sage-deep);
       text-transform: uppercase;
-      color: var(--pink);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .reveal-headline {
       font-family: var(--serif);
-      font-size: clamp(42px, 10vw, 64px);
-      font-weight: 300;
+      font-size: clamp(46px, 11vw, 68px);
+      font-weight: 500;
       font-style: italic;
-      color: var(--pink);
       line-height: 1.1;
       margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, var(--sage-deep) 0%, var(--lilac) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .reveal-message {
       font-size: 15px;
       font-weight: 300;
-      color: #9a3562;
-      line-height: 1.8;
+      color: var(--text-soft);
+      line-height: 1.85;
+      margin-bottom: 2rem;
     }
     .petal-row {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-top: 1.75rem;
+      gap: 8px;
     }
     .petal {
-      width: 8px;
-      height: 8px;
+      width: 10px; height: 10px;
       border-radius: 50%;
-      background: var(--pink-mid);
-      animation: pulse 1.8s ease-in-out infinite;
+      animation: bounce 1.6s ease-in-out infinite;
     }
-    .petal:nth-child(2) { animation-delay: 0.3s; }
-    .petal:nth-child(3) { animation-delay: 0.6s; }
-    .petal:nth-child(4) { animation-delay: 0.9s; }
-    .petal:nth-child(5) { animation-delay: 1.2s; }
+    .petal:nth-child(1) { background: var(--sun);   animation-delay: 0s; }
+    .petal:nth-child(2) { background: var(--sage);  animation-delay: 0.2s; }
+    .petal:nth-child(3) { background: var(--lilac); animation-delay: 0.4s; }
+    .petal:nth-child(4) { background: var(--cloud); animation-delay: 0.6s; }
+    .petal:nth-child(5) { background: var(--peach); animation-delay: 0.8s; }
 
     .solved-note {
+      margin-top: 1.5rem;
       font-size: 12px;
       color: var(--text-muted);
-      letter-spacing: 0.04em;
+      font-style: italic;
     }
 
     /* ── footer ── */
@@ -268,101 +342,100 @@
       border-top: 1px solid var(--border);
       padding: 1.5rem 2rem;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     footer p {
       font-family: var(--serif);
       font-size: 13px;
-      font-weight: 300;
+      font-style: italic;
       color: var(--text-muted);
-      letter-spacing: 0.06em;
     }
 
     /* ── animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; transform: scale(0.85); }
-      50%       { opacity: 1;   transform: scale(1.15); }
-    }
-    @keyframes revealIn {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .reveal-animate { animation: revealIn 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes fadeUp  { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes floatIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes revealPop { from { opacity:0; transform:scale(0.94) translateY(12px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    @keyframes bounce { 0%,100% { transform:translateY(0); opacity:0.5; } 50% { transform:translateY(-6px); opacity:1; } }
 
-    /* ── responsive ── */
     @media (max-width: 480px) {
-      main { padding: 3rem 1.25rem 5rem; }
+      main { padding: 2.5rem 1.25rem 5rem; }
       .challenge-card { padding: 1.75rem 1.25rem; }
-      .input-group { flex-direction: column; }
-      .input-group button { height: 44px; }
+      .riddle-box { padding: 1.25rem; }
+      .input-row { flex-direction: column; }
+      .reveal-body { padding: 2.5rem 1.5rem 2.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    <span class="top-bar-text">Samta's Baby Shower &nbsp;&middot;&nbsp; Gender Reveal</span>
+  <div class="banner">
+    <span class="banner-text">Samta's Baby Shower &nbsp;&#10022;&nbsp; Gender Reveal</span>
   </div>
 
   <main>
 
-    <!-- Hero -->
+    <div class="bubbles">
+      <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+      <div class="bubble"></div><div class="bubble"></div>
+    </div>
+
     <div class="hero">
       <div class="hero-eyebrow">You've been invited</div>
       <h1>Welcome to<br><em>Samta's Baby Shower</em></h1>
-      <p>Curious about the gender before everyone else? Solve the challenge below — and the universe will be yours. Enjoy&nbsp;:)</p>
+      <p>If you are curious and want to know the gender ahead of everyone else, solve the challenge below — and the universe will be yours! Enjoy&nbsp;:)</p>
     </div>
 
-    <!-- Challenge Card -->
+    <div class="color-blocks">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
     <div class="challenge-card" id="challenge-card">
       <div class="card-label">Your challenge</div>
-      <div class="riddle">
-        I have cities, but no houses live there.<br>
-        I have mountains, but no trees grow there.<br>
-        I have water, but no fish swim there.<br>
-        I have roads, but no cars drive there.<br>
-        What am I?
+      <div class="riddle-box">
+        <div class="riddle">
+          I have cities, but no houses live there.<br>
+          I have mountains, but no trees grow there.<br>
+          I have water, but no fish swim there.<br>
+          I have roads, but no cars drive there.<br>
+          What am I?
+        </div>
       </div>
-      <div class="input-group">
+      <div class="input-row">
         <input
           type="text"
           id="answer-input"
-          placeholder="Type your answer and press Enter…"
+          placeholder="Type your answer here…"
           autocomplete="off"
           autocorrect="off"
           spellcheck="false"
         />
-        <button onclick="checkAnswer()">Reveal</button>
+        <button onclick="checkAnswer()">Reveal &#10022;</button>
       </div>
       <div class="feedback hint" id="feedback-msg">Hint: You use one every day to find your way.</div>
       <div class="tries" id="tries-label"></div>
     </div>
 
-    <!-- Divider -->
-    <div class="divider">
-      <div class="divider-line"></div>
-      <div class="divider-dot"></div>
-      <div class="divider-line"></div>
+    <div class="flower-divider">
+      <div class="flower-line"></div>
+      <span class="flower-icon">&#10038;</span>
+      <div class="flower-line"></div>
     </div>
 
-    <!-- Reveal Section (hidden until solved) -->
     <div id="reveal-section">
-      <div class="reveal-top reveal-animate">
-        <div class="reveal-eyebrow">The answer is revealed</div>
-        <div class="reveal-headline">It's a Girl!</div>
-        <div class="reveal-message">
-          Samta is expecting a beautiful baby girl.<br>
-          Welcome to the secret club — you solved it!
-        </div>
-        <div class="petal-row">
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
+      <div class="reveal-card">
+        <div class="reveal-top-strip"></div>
+        <div class="reveal-body">
+          <div class="reveal-badge">The secret is yours</div>
+          <div class="reveal-headline">It's a Girl!</div>
+          <div class="reveal-message">
+            Samta is expecting a beautiful baby girl.<br>
+            Welcome to the secret club — you solved it!
+          </div>
+          <div class="petal-row">
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal"></div><div class="petal"></div>
+          </div>
         </div>
       </div>
       <p class="solved-note">You figured it out before everyone else. Treasure this secret with love.</p>
@@ -371,7 +444,7 @@
   </main>
 
   <footer>
-    <p>Made with love &nbsp;&middot;&nbsp; Samta's Baby Shower</p>
+    <p>Made with love &nbsp;&#10022;&nbsp; Samta's Baby Shower</p>
   </footer>
 
   <script>
@@ -379,39 +452,33 @@
     var accepted = ['map', 'a map'];
 
     function checkAnswer() {
-      var input = document.getElementById('answer-input');
+      var input    = document.getElementById('answer-input');
       var feedback = document.getElementById('feedback-msg');
-      var triesLabel = document.getElementById('tries-label');
-      var val = input.value.trim().toLowerCase();
-
-      if (!val) {
-        input.focus();
-        return;
-      }
-
+      var triesLbl = document.getElementById('tries-label');
+      var val      = input.value.trim().toLowerCase();
+      if (!val) { input.focus(); return; }
       tries++;
-
       if (accepted.indexOf(val) !== -1) {
-        // correct
         document.getElementById('challenge-card').style.display = 'none';
-        document.querySelector('.divider').style.display = 'none';
+        document.querySelector('.flower-divider').style.display = 'none';
+        document.querySelector('.color-blocks').style.display   = 'none';
         var reveal = document.getElementById('reveal-section');
         reveal.style.display = 'block';
-        reveal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function() { reveal.scrollIntoView({ behavior:'smooth', block:'center' }); }, 100);
       } else {
-        // wrong
+        input.style.borderColor = '#d09060';
         feedback.textContent = tries >= 2
-          ? 'Still not quite — remember: you fold it, unfold it, and find your way with it.'
-          : 'Not quite. Try again!';
+          ? 'Still not quite — think of something flat you fold and unfold to navigate.'
+          : 'Not quite! Give it another try.';
         feedback.className = 'feedback wrong';
-        triesLabel.textContent = tries + ' attempt' + (tries === 1 ? '' : 's');
+        triesLbl.textContent = tries + ' attempt' + (tries === 1 ? '' : 's');
         input.value = '';
         input.focus();
-        input.style.borderColor = '#c0392b';
         setTimeout(function() {
           input.style.borderColor = '';
           feedback.className = 'feedback hint';
-        }, 1200);
+          feedback.textContent = 'Hint: You use one every day to find your way.';
+        }, 1500);
       }
     }
 
