@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samta's Baby Shower — Gender Reveal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #D4537E;
+      --pink-light: #FBEAF0;
+      --pink-mid: #F4C0D1;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #aaaaaa;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.18);
+      --bg: #fefefe;
+      --bg-secondary: #f9f8f7;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── top bar ── */
+    .top-bar {
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .top-bar-text {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── main ── */
+    main {
+      width: 100%;
+      max-width: 620px;
+      padding: 4rem 2rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── hero header ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--pink);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 8vw, 56px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+    .hero p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ── divider ── */
+    .divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--pink-mid);
+    }
+
+    /* ── challenge card ── */
+    .challenge-card {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      background: var(--bg);
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+    .card-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .riddle {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 2;
+      color: var(--text-primary);
+      border-left: 2px solid var(--pink-mid);
+      padding-left: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── input area ── */
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+    .input-group input {
+      flex: 1;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-group input::placeholder { color: var(--text-muted); }
+    .input-group input:focus { border-color: var(--pink); background: #fff; }
+    .input-group button {
+      height: 44px;
+      padding: 0 22px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--text-primary);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .input-group button:hover { background: #2d2d2d; }
+    .input-group button:active { transform: scale(0.97); }
+
+    .feedback {
+      margin-top: 0.75rem;
+      font-size: 13px;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .feedback.wrong { color: #c0392b; }
+    .feedback.hint { color: var(--text-muted); }
+    .tries {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 0.5rem;
+    }
+
+    /* ── reveal section ── */
+    #reveal-section {
+      display: none;
+      width: 100%;
+      text-align: center;
+      animation: fadeUp 0.7s ease both;
+    }
+    .reveal-top {
+      border: 1px solid var(--pink-mid);
+      border-radius: 16px;
+      background: var(--pink-light);
+      padding: 3rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .reveal-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1.25rem;
+    }
+    .reveal-headline {
+      font-family: var(--serif);
+      font-size: clamp(42px, 10vw, 64px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--pink);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .reveal-message {
+      font-size: 15px;
+      font-weight: 300;
+      color: #9a3562;
+      line-height: 1.8;
+    }
+    .petal-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 1.75rem;
+    }
+    .petal {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pink-mid);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .petal:nth-child(2) { animation-delay: 0.3s; }
+    .petal:nth-child(3) { animation-delay: 0.6s; }
+    .petal:nth-child(4) { animation-delay: 0.9s; }
+    .petal:nth-child(5) { animation-delay: 1.2s; }
+
+    .solved-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── footer ── */
+    footer {
+      width: 100%;
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    footer p {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.85); }
+      50%       { opacity: 1;   transform: scale(1.15); }
+    }
+    @keyframes revealIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .reveal-animate { animation: revealIn 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+
+    /* ── responsive ── */
+    @media (max-width: 480px) {
+      main { padding: 3rem 1.25rem 5rem; }
+      .challenge-card { padding: 1.75rem 1.25rem; }
+      .input-group { flex-direction: column; }
+      .input-group button { height: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span class="top-bar-text">Samta's Baby Shower &nbsp;&middot;&nbsp; Gender Reveal</span>
+  </div>
+
+  <main>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-eyebrow">You've been invited</div>
+      <h1>Welcome to<br><em>Samta's Baby Shower</em></h1>
+      <p>Curious about the gender before everyone else? Solve the challenge below — and the universe will be yours. Enjoy&nbsp;:)</p>
+    </div>
+
+    <!-- Challenge Card -->
+    <div class="challenge-card" id="challenge-card">
+      <div class="card-label">Your challenge</div>
+      <div class="riddle">
+        I have cities, but no houses live there.<br>
+        I have mountains, but no trees grow there.<br>
+        I have water, but no fish swim there.<br>
+        I have roads, but no cars drive there.<br>
+        What am I?
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          id="answer-input"
+          placeholder="Type your answer and press Enter…"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+        />
+        <button onclick="checkAnswer()">Reveal</button>
+      </div>
+      <div class="feedback hint" id="feedback-msg">Hint: You use one every day to find your way.</div>
+      <div class="tries" id="tries-label"></div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Reveal Section (hidden until solved) -->
+    <div id="reveal-section">
+      <div class="reveal-top reveal-animate">
+        <div class="reveal-eyebrow">The answer is revealed</div>
+        <div class="reveal-headline">It's a Girl!</div>
+        <div class="reveal-message">
+          Samta is expecting a beautiful baby girl.<br>
+          Welcome to the secret club — you solved it!
+        </div>
+        <div class="petal-row">
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+        </div>
+      </div>
+      <p class="solved-note">You figured it out before everyone else. Treasure this secret with love.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Made with love &nbsp;&middot;&nbsp; Samta's Baby Shower</p>
+  </footer>
+
+  <script>
+    var tries = 0;
+    var accepted = ['map', 'a map'];
+
+    function checkAnswer() {
+      var input = document.getElementById('answer-input');
+      var feedback = document.getElementById('feedback-msg');
+      var triesLabel = document.getElementById('tries-label');
+      var val = input.value.trim().toLowerCase();
+
+      if (!val) {
+        input.focus();
+        return;
+      }
+
+      tries++;
+
+      if (accepted.indexOf(val) !== -1) {
+        // correct
+        document.getElementById('challenge-card').style.display = 'none';
+        document.querySelector('.divider').style.display = 'none';
+        var reveal = document.getElementById('reveal-section');
+        reveal.style.display = 'block';
+        reveal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        // wrong
+        feedback.textContent = tries >= 2
+          ? 'Still not quite — remember: you fold it, unfold it, and find your way with it.'
+          : 'Not quite. Try again!';
+        feedback.className = 'feedback wrong';
+        triesLabel.textContent = tries + ' attempt' + (tries === 1 ? '' : 's');
+        input.value = '';
+        input.focus();
+        input.style.borderColor = '#c0392b';
+        setTimeout(function() {
+          input.style.borderColor = '';
+          feedback.className = 'feedback hint';
+        }, 1200);
+      }
+    }
+
+    document.getElementById('answer-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkAnswer();
+    });
+  </script>
+
+</body>
+</html>
