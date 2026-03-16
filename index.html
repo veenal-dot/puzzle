@@ -6,7 +6,7 @@
   <title>Samta's Baby Shower — Gender Reveal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -29,8 +29,8 @@
       --text-muted:  #b0a898;
       --border:      rgba(160,140,100,0.18);
       --border-hover:rgba(160,140,100,0.35);
-      --serif: 'Playfair Display', Georgia, serif;
-      --sans:  'Nunito', system-ui, sans-serif;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans:  'DM Sans', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -124,18 +124,20 @@
     }
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(34px, 7vw, 52px);
-      font-weight: 400;
-      line-height: 1.2;
+      font-size: clamp(36px, 7.5vw, 56px);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
       color: var(--text);
       margin-bottom: 1.25rem;
     }
-    .hero h1 em { font-style: italic; color: var(--sage-deep); }
+    .hero h1 em { font-style: italic; font-weight: 400; color: var(--sage-deep); }
     .hero p {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 300;
       color: var(--text-soft);
-      line-height: 1.85;
+      line-height: 1.9;
+      letter-spacing: 0.01em;
       max-width: 420px;
       margin: 0 auto;
     }
@@ -195,10 +197,11 @@
     }
     .riddle {
       font-family: var(--serif);
-      font-size: 18px;
-      font-weight: 400;
+      font-size: 19px;
+      font-weight: 300;
       font-style: italic;
-      line-height: 2.1;
+      line-height: 2.15;
+      letter-spacing: 0.01em;
       color: var(--text);
     }
 
@@ -296,10 +299,11 @@
     }
     .reveal-headline {
       font-family: var(--serif);
-      font-size: clamp(46px, 11vw, 68px);
-      font-weight: 500;
+      font-size: clamp(50px, 12vw, 72px);
+      font-weight: 300;
       font-style: italic;
-      line-height: 1.1;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
       background: linear-gradient(135deg, var(--sage-deep) 0%, var(--lilac) 100%);
       -webkit-background-clip: text;
@@ -307,10 +311,11 @@
       background-clip: text;
     }
     .reveal-message {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 300;
       color: var(--text-soft);
-      line-height: 1.85;
+      line-height: 1.9;
+      letter-spacing: 0.01em;
       margin-bottom: 2rem;
     }
     .petal-row {
@@ -331,9 +336,11 @@
 
     .solved-note {
       margin-top: 1.5rem;
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 300;
       font-style: italic;
+      letter-spacing: 0.03em;
+      color: var(--text-muted);
     }
 
     /* ── footer ── */
@@ -347,8 +354,10 @@
     }
     footer p {
       font-family: var(--serif);
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 300;
       font-style: italic;
+      letter-spacing: 0.04em;
       color: var(--text-muted);
     }
 
@@ -357,6 +366,22 @@
     @keyframes floatIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     @keyframes revealPop { from { opacity:0; transform:scale(0.94) translateY(12px); } to { opacity:1; transform:scale(1) translateY(0); } }
     @keyframes bounce { 0%,100% { transform:translateY(0); opacity:0.5; } 50% { transform:translateY(-6px); opacity:1; } }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    #icons-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
     @media (max-width: 480px) {
       main { padding: 2.5rem 1.25rem 5rem; }
@@ -369,6 +394,8 @@
 </head>
 <body>
 
+  <canvas id="confetti-canvas"></canvas>
+  <canvas id="icons-canvas"></canvas>
   <div class="banner">
     <span class="banner-text">Samta's Baby Shower &nbsp;&#10022;&nbsp; Gender Reveal</span>
   </div>
@@ -383,7 +410,7 @@
     <div class="hero">
       <div class="hero-eyebrow">You've been invited</div>
       <h1>Welcome to<br><em>Samta's Baby Shower</em></h1>
-      <p>Curious and excited enough to know the gender ahead of everyone else? solve the challenge below — and the universe will be yours! Vijay Bhava &nbsp;:)</p>
+      <p>If you are curious and want to know the gender ahead of everyone else, solve the challenge below — and the universe will be yours! Enjoy&nbsp;:)</p>
     </div>
 
     <div class="color-blocks">
@@ -448,6 +475,111 @@
   </footer>
 
   <script>
+    /* ── floating icons background ── */
+    (function() {
+      var canvas = document.getElementById('icons-canvas');
+      var ctx    = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', function() { resize(); initIcons(); });
+
+      var colors = ['#f7d97a','#a8c8a0','#c0b0d8','#b8d8e8','#f0c898','#d4e8b8','#e8d0f0','#b8e8d8'];
+      var icons  = [];
+      var shapes = ['star','heart','moon','diamond','dot','star','heart'];
+
+      function drawStar(cx, cy, r, c) {
+        c.beginPath();
+        for (var i = 0; i < 10; i++) {
+          var a = (i * Math.PI) / 5 - Math.PI / 2;
+          var rad = i % 2 === 0 ? r : r * 0.42;
+          c.lineTo(cx + rad * Math.cos(a), cy + rad * Math.sin(a));
+        }
+        c.closePath();
+      }
+
+      function drawHeart(cx, cy, r, c) {
+        var s = r * 0.9;
+        c.beginPath();
+        c.moveTo(cx, cy + s * 0.35);
+        c.bezierCurveTo(cx, cy, cx - s, cy, cx - s, cy - s * 0.35);
+        c.bezierCurveTo(cx - s, cy - s * 0.85, cx, cy - s * 0.85, cx, cy - s * 0.35);
+        c.bezierCurveTo(cx, cy - s * 0.85, cx + s, cy - s * 0.85, cx + s, cy - s * 0.35);
+        c.bezierCurveTo(cx + s, cy, cx, cy, cx, cy + s * 0.35);
+        c.closePath();
+      }
+
+      function drawMoon(cx, cy, r, c) {
+        c.beginPath();
+        c.arc(cx, cy, r, 0.35 * Math.PI, 1.65 * Math.PI);
+        c.arc(cx - r * 0.28, cy, r * 0.78, 1.65 * Math.PI, 0.35 * Math.PI, true);
+        c.closePath();
+      }
+
+      function drawDiamond(cx, cy, r, c) {
+        c.beginPath();
+        c.moveTo(cx, cy - r);
+        c.lineTo(cx + r * 0.65, cy);
+        c.lineTo(cx, cy + r);
+        c.lineTo(cx - r * 0.65, cy);
+        c.closePath();
+      }
+
+      function initIcons() {
+        var W = canvas.width, H = canvas.height;
+        var count = Math.max(18, Math.min(Math.floor((W * H) / 22000), 45));
+        icons = [];
+        for (var i = 0; i < count; i++) {
+          icons.push({
+            x: Math.random() * W, y: Math.random() * H,
+            r: 5 + Math.random() * 9,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            shape: shapes[Math.floor(Math.random() * shapes.length)],
+            alpha: 0.12 + Math.random() * 0.22,
+            vy: -0.12 - Math.random() * 0.22,
+            vx: (Math.random() - 0.5) * 0.18,
+            rot: Math.random() * Math.PI * 2,
+            rotV: (Math.random() - 0.5) * 0.004,
+            pulse: Math.random() * Math.PI * 2,
+            pulseS: 0.004 + Math.random() * 0.008
+          });
+        }
+      }
+      initIcons();
+
+      function draw() {
+        var W = canvas.width, H = canvas.height;
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < icons.length; i++) {
+          var ic = icons[i];
+          ic.x += ic.vx; ic.y += ic.vy;
+          ic.rot += ic.rotV; ic.pulse += ic.pulseS;
+          var pr = ic.r * (1 + 0.08 * Math.sin(ic.pulse));
+          var pa = ic.alpha * (0.85 + 0.15 * Math.sin(ic.pulse + 1));
+          if (ic.y + pr < 0) ic.y = H + pr;
+          if (ic.x < -pr)    ic.x = W + pr;
+          if (ic.x > W + pr) ic.x = -pr;
+          ctx.save();
+          ctx.globalAlpha = pa;
+          ctx.translate(ic.x, ic.y);
+          ctx.rotate(ic.rot);
+          ctx.fillStyle = ic.color;
+          if      (ic.shape === 'star')    drawStar(0, 0, pr, ctx);
+          else if (ic.shape === 'heart')   drawHeart(0, 0, pr, ctx);
+          else if (ic.shape === 'moon')    drawMoon(0, 0, pr, ctx);
+          else if (ic.shape === 'diamond') drawDiamond(0, 0, pr, ctx);
+          else { ctx.beginPath(); ctx.arc(0, 0, pr * 0.55, 0, Math.PI * 2); ctx.closePath(); }
+          ctx.fill();
+          ctx.restore();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
     var tries = 0;
     var accepted = ['map', 'a map'];
 
@@ -465,6 +597,7 @@
         var reveal = document.getElementById('reveal-section');
         reveal.style.display = 'block';
         setTimeout(function() { reveal.scrollIntoView({ behavior:'smooth', block:'center' }); }, 100);
+        launchConfetti();
       } else {
         input.style.borderColor = '#d09060';
         feedback.textContent = tries >= 2
@@ -485,6 +618,85 @@
     document.getElementById('answer-input').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') checkAnswer();
     });
+
+    function launchConfetti() {
+      var canvas = document.getElementById('confetti-canvas');
+      var ctx    = canvas.getContext('2d');
+      var W      = canvas.width  = window.innerWidth;
+      var H      = canvas.height = window.innerHeight;
+      var colors = ['#f7d97a','#a8c8a0','#c0b0d8','#b8d8e8','#f0c898','#f2c4d0','#d4e8b8','#fad0a0'];
+      var pieces = [];
+      var total  = 160;
+      var raf;
+
+      for (var i = 0; i < total; i++) {
+        pieces.push({
+          x:      Math.random() * W,
+          y:      Math.random() * H - H,
+          w:      6 + Math.random() * 8,
+          h:      4 + Math.random() * 5,
+          color:  colors[Math.floor(Math.random() * colors.length)],
+          rot:    Math.random() * Math.PI * 2,
+          rotV:   (Math.random() - 0.5) * 0.12,
+          vx:     (Math.random() - 0.5) * 1.8,
+          vy:     1.8 + Math.random() * 3.2,
+          alpha:  1,
+          shape:  Math.random() > 0.5 ? 'rect' : 'circle'
+        });
+      }
+
+      var startTime = null;
+      var duration  = 5500;
+
+      function draw(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = ts - startTime;
+        ctx.clearRect(0, 0, W, H);
+
+        var alive = false;
+        for (var i = 0; i < pieces.length; i++) {
+          var p = pieces[i];
+          p.x  += p.vx;
+          p.y  += p.vy;
+          p.rot += p.rotV;
+          p.vy  += 0.04;
+
+          if (elapsed > duration * 0.6) {
+            p.alpha = Math.max(0, p.alpha - 0.012);
+          }
+
+          if (p.y < H + 20 && p.alpha > 0) alive = true;
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          if (p.shape === 'rect') {
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        if (alive && elapsed < duration + 1000) {
+          raf = requestAnimationFrame(draw);
+        } else {
+          ctx.clearRect(0, 0, W, H);
+          cancelAnimationFrame(raf);
+        }
+      }
+
+      raf = requestAnimationFrame(draw);
+
+      window.addEventListener('resize', function() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      });
+    }
   </script>
 
 </body>
